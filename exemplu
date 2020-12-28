@@ -1,0 +1,57 @@
+int adunare (int par1,int par2 )
+{
+	int local = 2;
+    prt local;
+    local = 2  + 2 * local;
+    prt local;
+    int local2= 100;
+     local = local * local2;
+    prt local;
+    
+    int aa = 1;
+    int c1 = 5;
+    int b = 3;
+    aa = aa + (2 + 3) * c1 - 2 * b;
+    prt aa;
+
+    real x=126.5;
+    local=local + x;
+    prt local;
+}
+
+
+
+struct exempl{
+int param1;
+string param2;
+} oClasa;
+
+
+int main()
+{
+int a =2;
+a = 6 + a;
+string c = "test";
+string aux = " reusit";
+string fruct = "banana";
+real d = 2.123;
+boolean e ;
+
+
+
+int arr[5];
+
+if( a == 2 && a > 100)
+a = 1;
+else
+while( a < 3 )
+a = 12 ;
+for( a = 2; a < 10;  a = a + 10 ;)
+{
+concateneaza c,aux;
+prt c;
+copiaza aux,fruct;
+prt aux;
+
+}
+}

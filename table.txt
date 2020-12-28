@@ -1,0 +1,16 @@
+tip :int -> par1 cu valoarea : NULL 
+tip :int -> local cu valoarea : 726 
+tip :int -> local2 cu valoarea : 100 
+tip :int -> aa cu valoarea : 20 
+tip :int -> c1 cu valoarea : 5 
+tip :int -> b cu valoarea : 3 
+tip :real -> x cu valoarea : 126.5 
+tip :int -> adunare cu valoarea : FUNCTIE 
+tip :int -> param1 cu valoarea : NULL 
+tip :string -> param2 cu valoarea : NULL 
+tip :int -> a cu valoarea : 12 
+tip :string -> c cu valoarea : test reusit 
+tip :string -> aux cu valoarea : banana 
+tip :string -> fruct cu valoarea : banana 
+tip :real -> d cu valoarea : 2.123 
+tip :boolean -> e cu valoarea : NULL 

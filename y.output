@@ -1,0 +1,2417 @@
+Terminals unused in grammar
+
+   STCP
+   STPT
+   RETURN
+   CONST
+
+
+State 4 conflicts: 1 shift/reduce
+State 26 conflicts: 1 shift/reduce
+State 109 conflicts: 1 shift/reduce
+State 144 conflicts: 1 shift/reduce
+State 163 conflicts: 1 shift/reduce
+
+
+Grammar
+
+    0 $accept: START $end
+
+    1 START: DEF_GLOBAL
+    2      | START DEF_GLOBAL
+
+    3 DEF_GLOBAL: VARTYPE IDENTIFIER ';'
+    4           | VARTYPE IDENTIFIER ASSIGN VALOARE ';'
+    5           | VARTYPE IDENTIFIER ASSIGN EXPRESIE ';'
+    6           | VARTYPE IDENTIFIER '(' ')' BGIN BLOC END
+    7           | VARTYPE IDENTIFIER '(' LISTA_PARAMETRII ')' BGIN BLOC END
+    8           | VARTYPE ARRAY_IDENTIFIER ';'
+    9           | STRUCT IDENTIFIER BGIN BLOC END ';'
+   10           | STRUCT IDENTIFIER BGIN BLOC END IDENTIFIER ';'
+   11           | ';'
+
+   12 BLOC: STATEMENT
+   13     | STRUCT IDENTIFIER BGIN BLOC END ';'
+   14     | STRUCT IDENTIFIER BGIN BLOC END IDENTIFIER ';'
+   15     | DEF_LOCALE
+   16     | STRUCTURA_DE_CONTROL
+   17     | APEL_FUNCTIE
+   18     | BLOC APEL_FUNCTIE
+   19     | BLOC STATEMENT
+   20     | BLOC DEF_LOCALE
+   21     | BLOC STRUCTURA_DE_CONTROL
+
+   22 APEL_FUNCTIE: IDENTIFIER '(' ')' ';'
+   23             | IDENTIFIER '(' PAREM_LIST ')' ';'
+   24             | PRINT IDENTIFIER
+
+   25 PAREM_LIST: IDENTIFIER
+   26           | PAREM_LIST ',' IDENTIFIER
+
+   27 BLOC2: STATEMENT
+   28      | DEF_LOCALE
+   29      | STRUCTURA_DE_CONTROL
+
+   30 DEF_LOCALE: VARTYPE IDENTIFIER ';'
+   31           | VARTYPE IDENTIFIER ASSIGN VALOARE ';'
+   32           | VARTYPE IDENTIFIER ASSIGN EXPRESIE ';'
+   33           | VARTYPE ARRAY_IDENTIFIER ';'
+   34           | ';'
+
+   35 STATEMENT: IDENTIFIER ASSIGN EXPRESIE ';'
+   36          | STCT IDENTIFIER ',' IDENTIFIER ';'
+   37          | STCPY IDENTIFIER ',' IDENTIFIER ';'
+
+   38 LISTA_PARAMETRII: VARTYPE IDENTIFIER
+   39                 | LISTA_PARAMETRII ',' VARTYPE IDENTIFIER
+
+   40 STRUCTURA_DE_CONTROL: IF_CAZURI
+   41                     | WHILE_CAZURI
+   42                     | FOR_CAZURI
+
+   43 IF_CAZURI: IF '(' condition ')' BGIN BLOC END ELSE BGIN BLOC END
+   44          | IF '(' condition ')' BGIN BLOC END ELSE BLOC2
+   45          | IF '(' condition ')' BGIN BLOC END
+   46          | IF '(' condition ')' BLOC2
+   47          | IF '(' condition ')' BLOC2 ELSE BGIN BLOC END
+   48          | IF '(' condition ')' BLOC2 ELSE BLOC2
+
+   49 WHILE_CAZURI: WHILE '(' condition ')' BGIN BLOC END
+   50             | WHILE '(' condition ')' BLOC2
+
+   51 FOR_CAZURI: FOR '(' STATEMENT condition ';' STATEMENT ')' BLOC2
+   52           | FOR '(' STATEMENT condition ';' STATEMENT ')' BGIN BLOC END
+
+   53 condition: bools
+   54          | condition LEQ bools
+   55          | condition LE bools
+   56          | condition GE bools
+   57          | condition GEQ bools
+   58          | condition EQ bools
+   59          | condition NEQ bools
+   60          | condition AND bools
+   61          | condition OR bools
+   62          | '(' condition ')'
+
+   63 bools: TRUE
+   64      | FALSE
+   65      | EXPRESIE
+
+   66 EXPRESIE: INTEGER_VALUE
+   67         | IDENTIFIER
+   68         | EXPRESIE '+' EXPRESIE
+   69         | EXPRESIE '-' EXPRESIE
+   70         | EXPRESIE '*' EXPRESIE
+   71         | EXPRESIE '/' EXPRESIE
+   72         | '(' EXPRESIE ')'
+
+   73 VARTYPE: INT
+   74        | REAL
+   75        | BOOL
+   76        | STRUCT
+   77        | STRING
+
+   78 VALOARE: FLOAT_VALUE
+   79        | STRING_VALUE
+   80        | CHARACTER_VALUE
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+'(' (40) 6 7 22 23 43 44 45 46 47 48 49 50 51 52 62 72
+')' (41) 6 7 22 23 43 44 45 46 47 48 49 50 51 52 62 72
+'*' (42) 70
+'+' (43) 68
+',' (44) 26 36 37 39
+'-' (45) 69
+'/' (47) 71
+';' (59) 3 4 5 8 9 10 11 13 14 22 23 30 31 32 33 34 35 36 37 51 52
+error (256)
+ASSIGN (258) 4 5 31 32 35
+NEQ (259) 59
+EQ (260) 58
+LE (261) 55
+LEQ (262) 54
+GE (263) 56
+GEQ (264) 57
+AND (265) 60
+OR (266) 61
+TRUE (267) 63
+FALSE (268) 64
+STCP (269)
+STCT (270) 36
+STPT (271)
+STCPY (272) 37
+IF (273) 43 44 45 46 47 48
+WHILE (274) 49 50
+FOR (275) 51 52
+ELSE (276) 43 44 47 48
+RETURN (277)
+CONST (278)
+PRINT (279) 24
+BGIN (280) 6 7 9 10 13 14 43 44 45 47 49 52
+END (281) 6 7 9 10 13 14 43 44 45 47 49 52
+REAL (282) 74
+INT (283) 73
+BOOL (284) 75
+STRUCT (285) 9 10 13 14 76
+STRING (286) 77
+CHARACTER_VALUE (287) 80
+INTEGER_VALUE (288) 66
+FLOAT_VALUE (289) 78
+STRING_VALUE (290) 79
+ARRAY_IDENTIFIER (291) 8 33
+IDENTIFIER (292) 3 4 5 6 7 9 10 13 14 22 23 24 25 26 30 31 32 35 36
+    37 38 39 67
+
+
+Nonterminals, with rules where they appear
+
+$accept (46)
+    on left: 0
+START (47)
+    on left: 1 2, on right: 0 2
+DEF_GLOBAL (48)
+    on left: 3 4 5 6 7 8 9 10 11, on right: 1 2
+BLOC (49)
+    on left: 12 13 14 15 16 17 18 19 20 21, on right: 6 7 9 10 13 14
+    18 19 20 21 43 44 45 47 49 52
+APEL_FUNCTIE (50)
+    on left: 22 23 24, on right: 17 18
+PAREM_LIST (51)
+    on left: 25 26, on right: 23 26
+BLOC2 (52)
+    on left: 27 28 29, on right: 44 46 47 48 50 51
+DEF_LOCALE (53)
+    on left: 30 31 32 33 34, on right: 15 20 28
+STATEMENT (54)
+    on left: 35 36 37, on right: 12 19 27 51 52
+LISTA_PARAMETRII (55)
+    on left: 38 39, on right: 7 39
+STRUCTURA_DE_CONTROL (56)
+    on left: 40 41 42, on right: 16 21 29
+IF_CAZURI (57)
+    on left: 43 44 45 46 47 48, on right: 40
+WHILE_CAZURI (58)
+    on left: 49 50, on right: 41
+FOR_CAZURI (59)
+    on left: 51 52, on right: 42
+condition (60)
+    on left: 53 54 55 56 57 58 59 60 61 62, on right: 43 44 45 46 47
+    48 49 50 51 52 54 55 56 57 58 59 60 61 62
+bools (61)
+    on left: 63 64 65, on right: 53 54 55 56 57 58 59 60 61
+EXPRESIE (62)
+    on left: 66 67 68 69 70 71 72, on right: 5 32 35 65 68 69 70 71
+    72
+VARTYPE (63)
+    on left: 73 74 75 76 77, on right: 3 4 5 6 7 8 30 31 32 33 38 39
+VALOARE (64)
+    on left: 78 79 80, on right: 4 31
+
+
+State 0
+
+    0 $accept: . START $end
+
+    REAL    shift, and go to state 1
+    INT     shift, and go to state 2
+    BOOL    shift, and go to state 3
+    STRUCT  shift, and go to state 4
+    STRING  shift, and go to state 5
+    ';'     shift, and go to state 6
+
+    START       go to state 7
+    DEF_GLOBAL  go to state 8
+    VARTYPE     go to state 9
+
+
+State 1
+
+   74 VARTYPE: REAL .
+
+    $default  reduce using rule 74 (VARTYPE)
+
+
+State 2
+
+   73 VARTYPE: INT .
+
+    $default  reduce using rule 73 (VARTYPE)
+
+
+State 3
+
+   75 VARTYPE: BOOL .
+
+    $default  reduce using rule 75 (VARTYPE)
+
+
+State 4
+
+    9 DEF_GLOBAL: STRUCT . IDENTIFIER BGIN BLOC END ';'
+   10           | STRUCT . IDENTIFIER BGIN BLOC END IDENTIFIER ';'
+   76 VARTYPE: STRUCT .
+
+    IDENTIFIER  shift, and go to state 10
+
+    IDENTIFIER  [reduce using rule 76 (VARTYPE)]
+    $default    reduce using rule 76 (VARTYPE)
+
+
+State 5
+
+   77 VARTYPE: STRING .
+
+    $default  reduce using rule 77 (VARTYPE)
+
+
+State 6
+
+   11 DEF_GLOBAL: ';' .
+
+    $default  reduce using rule 11 (DEF_GLOBAL)
+
+
+State 7
+
+    0 $accept: START . $end
+    2 START: START . DEF_GLOBAL
+
+    $end    shift, and go to state 11
+    REAL    shift, and go to state 1
+    INT     shift, and go to state 2
+    BOOL    shift, and go to state 3
+    STRUCT  shift, and go to state 4
+    STRING  shift, and go to state 5
+    ';'     shift, and go to state 6
+
+    DEF_GLOBAL  go to state 12
+    VARTYPE     go to state 9
+
+
+State 8
+
+    1 START: DEF_GLOBAL .
+
+    $default  reduce using rule 1 (START)
+
+
+State 9
+
+    3 DEF_GLOBAL: VARTYPE . IDENTIFIER ';'
+    4           | VARTYPE . IDENTIFIER ASSIGN VALOARE ';'
+    5           | VARTYPE . IDENTIFIER ASSIGN EXPRESIE ';'
+    6           | VARTYPE . IDENTIFIER '(' ')' BGIN BLOC END
+    7           | VARTYPE . IDENTIFIER '(' LISTA_PARAMETRII ')' BGIN BLOC END
+    8           | VARTYPE . ARRAY_IDENTIFIER ';'
+
+    ARRAY_IDENTIFIER  shift, and go to state 13
+    IDENTIFIER        shift, and go to state 14
+
+
+State 10
+
+    9 DEF_GLOBAL: STRUCT IDENTIFIER . BGIN BLOC END ';'
+   10           | STRUCT IDENTIFIER . BGIN BLOC END IDENTIFIER ';'
+
+    BGIN  shift, and go to state 15
+
+
+State 11
+
+    0 $accept: START $end .
+
+    $default  accept
+
+
+State 12
+
+    2 START: START DEF_GLOBAL .
+
+    $default  reduce using rule 2 (START)
+
+
+State 13
+
+    8 DEF_GLOBAL: VARTYPE ARRAY_IDENTIFIER . ';'
+
+    ';'  shift, and go to state 16
+
+
+State 14
+
+    3 DEF_GLOBAL: VARTYPE IDENTIFIER . ';'
+    4           | VARTYPE IDENTIFIER . ASSIGN VALOARE ';'
+    5           | VARTYPE IDENTIFIER . ASSIGN EXPRESIE ';'
+    6           | VARTYPE IDENTIFIER . '(' ')' BGIN BLOC END
+    7           | VARTYPE IDENTIFIER . '(' LISTA_PARAMETRII ')' BGIN BLOC END
+
+    ASSIGN  shift, and go to state 17
+    ';'     shift, and go to state 18
+    '('     shift, and go to state 19
+
+
+State 15
+
+    9 DEF_GLOBAL: STRUCT IDENTIFIER BGIN . BLOC END ';'
+   10           | STRUCT IDENTIFIER BGIN . BLOC END IDENTIFIER ';'
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 26
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    BLOC                  go to state 29
+    APEL_FUNCTIE          go to state 30
+    DEF_LOCALE            go to state 31
+    STATEMENT             go to state 32
+    STRUCTURA_DE_CONTROL  go to state 33
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 16
+
+    8 DEF_GLOBAL: VARTYPE ARRAY_IDENTIFIER ';' .
+
+    $default  reduce using rule 8 (DEF_GLOBAL)
+
+
+State 17
+
+    4 DEF_GLOBAL: VARTYPE IDENTIFIER ASSIGN . VALOARE ';'
+    5           | VARTYPE IDENTIFIER ASSIGN . EXPRESIE ';'
+
+    CHARACTER_VALUE  shift, and go to state 38
+    INTEGER_VALUE    shift, and go to state 39
+    FLOAT_VALUE      shift, and go to state 40
+    STRING_VALUE     shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    '('              shift, and go to state 43
+
+    EXPRESIE  go to state 44
+    VALOARE   go to state 45
+
+
+State 18
+
+    3 DEF_GLOBAL: VARTYPE IDENTIFIER ';' .
+
+    $default  reduce using rule 3 (DEF_GLOBAL)
+
+
+State 19
+
+    6 DEF_GLOBAL: VARTYPE IDENTIFIER '(' . ')' BGIN BLOC END
+    7           | VARTYPE IDENTIFIER '(' . LISTA_PARAMETRII ')' BGIN BLOC END
+
+    REAL    shift, and go to state 1
+    INT     shift, and go to state 2
+    BOOL    shift, and go to state 3
+    STRUCT  shift, and go to state 46
+    STRING  shift, and go to state 5
+    ')'     shift, and go to state 47
+
+    LISTA_PARAMETRII  go to state 48
+    VARTYPE           go to state 49
+
+
+State 20
+
+   36 STATEMENT: STCT . IDENTIFIER ',' IDENTIFIER ';'
+
+    IDENTIFIER  shift, and go to state 50
+
+
+State 21
+
+   37 STATEMENT: STCPY . IDENTIFIER ',' IDENTIFIER ';'
+
+    IDENTIFIER  shift, and go to state 51
+
+
+State 22
+
+   43 IF_CAZURI: IF . '(' condition ')' BGIN BLOC END ELSE BGIN BLOC END
+   44          | IF . '(' condition ')' BGIN BLOC END ELSE BLOC2
+   45          | IF . '(' condition ')' BGIN BLOC END
+   46          | IF . '(' condition ')' BLOC2
+   47          | IF . '(' condition ')' BLOC2 ELSE BGIN BLOC END
+   48          | IF . '(' condition ')' BLOC2 ELSE BLOC2
+
+    '('  shift, and go to state 52
+
+
+State 23
+
+   49 WHILE_CAZURI: WHILE . '(' condition ')' BGIN BLOC END
+   50             | WHILE . '(' condition ')' BLOC2
+
+    '('  shift, and go to state 53
+
+
+State 24
+
+   51 FOR_CAZURI: FOR . '(' STATEMENT condition ';' STATEMENT ')' BLOC2
+   52           | FOR . '(' STATEMENT condition ';' STATEMENT ')' BGIN BLOC END
+
+    '('  shift, and go to state 54
+
+
+State 25
+
+   24 APEL_FUNCTIE: PRINT . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 55
+
+
+State 26
+
+   13 BLOC: STRUCT . IDENTIFIER BGIN BLOC END ';'
+   14     | STRUCT . IDENTIFIER BGIN BLOC END IDENTIFIER ';'
+   76 VARTYPE: STRUCT .
+
+    IDENTIFIER  shift, and go to state 56
+
+    IDENTIFIER  [reduce using rule 76 (VARTYPE)]
+    $default    reduce using rule 76 (VARTYPE)
+
+
+State 27
+
+   22 APEL_FUNCTIE: IDENTIFIER . '(' ')' ';'
+   23             | IDENTIFIER . '(' PAREM_LIST ')' ';'
+   35 STATEMENT: IDENTIFIER . ASSIGN EXPRESIE ';'
+
+    ASSIGN  shift, and go to state 57
+    '('     shift, and go to state 58
+
+
+State 28
+
+   34 DEF_LOCALE: ';' .
+
+    $default  reduce using rule 34 (DEF_LOCALE)
+
+
+State 29
+
+    9 DEF_GLOBAL: STRUCT IDENTIFIER BGIN BLOC . END ';'
+   10           | STRUCT IDENTIFIER BGIN BLOC . END IDENTIFIER ';'
+   18 BLOC: BLOC . APEL_FUNCTIE
+   19     | BLOC . STATEMENT
+   20     | BLOC . DEF_LOCALE
+   21     | BLOC . STRUCTURA_DE_CONTROL
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    END         shift, and go to state 59
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 46
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    APEL_FUNCTIE          go to state 60
+    DEF_LOCALE            go to state 61
+    STATEMENT             go to state 62
+    STRUCTURA_DE_CONTROL  go to state 63
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 30
+
+   17 BLOC: APEL_FUNCTIE .
+
+    $default  reduce using rule 17 (BLOC)
+
+
+State 31
+
+   15 BLOC: DEF_LOCALE .
+
+    $default  reduce using rule 15 (BLOC)
+
+
+State 32
+
+   12 BLOC: STATEMENT .
+
+    $default  reduce using rule 12 (BLOC)
+
+
+State 33
+
+   16 BLOC: STRUCTURA_DE_CONTROL .
+
+    $default  reduce using rule 16 (BLOC)
+
+
+State 34
+
+   40 STRUCTURA_DE_CONTROL: IF_CAZURI .
+
+    $default  reduce using rule 40 (STRUCTURA_DE_CONTROL)
+
+
+State 35
+
+   41 STRUCTURA_DE_CONTROL: WHILE_CAZURI .
+
+    $default  reduce using rule 41 (STRUCTURA_DE_CONTROL)
+
+
+State 36
+
+   42 STRUCTURA_DE_CONTROL: FOR_CAZURI .
+
+    $default  reduce using rule 42 (STRUCTURA_DE_CONTROL)
+
+
+State 37
+
+   30 DEF_LOCALE: VARTYPE . IDENTIFIER ';'
+   31           | VARTYPE . IDENTIFIER ASSIGN VALOARE ';'
+   32           | VARTYPE . IDENTIFIER ASSIGN EXPRESIE ';'
+   33           | VARTYPE . ARRAY_IDENTIFIER ';'
+
+    ARRAY_IDENTIFIER  shift, and go to state 64
+    IDENTIFIER        shift, and go to state 65
+
+
+State 38
+
+   80 VALOARE: CHARACTER_VALUE .
+
+    $default  reduce using rule 80 (VALOARE)
+
+
+State 39
+
+   66 EXPRESIE: INTEGER_VALUE .
+
+    $default  reduce using rule 66 (EXPRESIE)
+
+
+State 40
+
+   78 VALOARE: FLOAT_VALUE .
+
+    $default  reduce using rule 78 (VALOARE)
+
+
+State 41
+
+   79 VALOARE: STRING_VALUE .
+
+    $default  reduce using rule 79 (VALOARE)
+
+
+State 42
+
+   67 EXPRESIE: IDENTIFIER .
+
+    $default  reduce using rule 67 (EXPRESIE)
+
+
+State 43
+
+   72 EXPRESIE: '(' . EXPRESIE ')'
+
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 43
+
+    EXPRESIE  go to state 66
+
+
+State 44
+
+    5 DEF_GLOBAL: VARTYPE IDENTIFIER ASSIGN EXPRESIE . ';'
+   68 EXPRESIE: EXPRESIE . '+' EXPRESIE
+   69         | EXPRESIE . '-' EXPRESIE
+   70         | EXPRESIE . '*' EXPRESIE
+   71         | EXPRESIE . '/' EXPRESIE
+
+    '+'  shift, and go to state 67
+    '-'  shift, and go to state 68
+    '*'  shift, and go to state 69
+    '/'  shift, and go to state 70
+    ';'  shift, and go to state 71
+
+
+State 45
+
+    4 DEF_GLOBAL: VARTYPE IDENTIFIER ASSIGN VALOARE . ';'
+
+    ';'  shift, and go to state 72
+
+
+State 46
+
+   76 VARTYPE: STRUCT .
+
+    $default  reduce using rule 76 (VARTYPE)
+
+
+State 47
+
+    6 DEF_GLOBAL: VARTYPE IDENTIFIER '(' ')' . BGIN BLOC END
+
+    BGIN  shift, and go to state 73
+
+
+State 48
+
+    7 DEF_GLOBAL: VARTYPE IDENTIFIER '(' LISTA_PARAMETRII . ')' BGIN BLOC END
+   39 LISTA_PARAMETRII: LISTA_PARAMETRII . ',' VARTYPE IDENTIFIER
+
+    ')'  shift, and go to state 74
+    ','  shift, and go to state 75
+
+
+State 49
+
+   38 LISTA_PARAMETRII: VARTYPE . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 76
+
+
+State 50
+
+   36 STATEMENT: STCT IDENTIFIER . ',' IDENTIFIER ';'
+
+    ','  shift, and go to state 77
+
+
+State 51
+
+   37 STATEMENT: STCPY IDENTIFIER . ',' IDENTIFIER ';'
+
+    ','  shift, and go to state 78
+
+
+State 52
+
+   43 IF_CAZURI: IF '(' . condition ')' BGIN BLOC END ELSE BGIN BLOC END
+   44          | IF '(' . condition ')' BGIN BLOC END ELSE BLOC2
+   45          | IF '(' . condition ')' BGIN BLOC END
+   46          | IF '(' . condition ')' BLOC2
+   47          | IF '(' . condition ')' BLOC2 ELSE BGIN BLOC END
+   48          | IF '(' . condition ')' BLOC2 ELSE BLOC2
+
+    TRUE           shift, and go to state 79
+    FALSE          shift, and go to state 80
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 81
+
+    condition  go to state 82
+    bools      go to state 83
+    EXPRESIE   go to state 84
+
+
+State 53
+
+   49 WHILE_CAZURI: WHILE '(' . condition ')' BGIN BLOC END
+   50             | WHILE '(' . condition ')' BLOC2
+
+    TRUE           shift, and go to state 79
+    FALSE          shift, and go to state 80
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 81
+
+    condition  go to state 85
+    bools      go to state 83
+    EXPRESIE   go to state 84
+
+
+State 54
+
+   51 FOR_CAZURI: FOR '(' . STATEMENT condition ';' STATEMENT ')' BLOC2
+   52           | FOR '(' . STATEMENT condition ';' STATEMENT ')' BGIN BLOC END
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IDENTIFIER  shift, and go to state 86
+
+    STATEMENT  go to state 87
+
+
+State 55
+
+   24 APEL_FUNCTIE: PRINT IDENTIFIER .
+
+    $default  reduce using rule 24 (APEL_FUNCTIE)
+
+
+State 56
+
+   13 BLOC: STRUCT IDENTIFIER . BGIN BLOC END ';'
+   14     | STRUCT IDENTIFIER . BGIN BLOC END IDENTIFIER ';'
+
+    BGIN  shift, and go to state 88
+
+
+State 57
+
+   35 STATEMENT: IDENTIFIER ASSIGN . EXPRESIE ';'
+
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 43
+
+    EXPRESIE  go to state 89
+
+
+State 58
+
+   22 APEL_FUNCTIE: IDENTIFIER '(' . ')' ';'
+   23             | IDENTIFIER '(' . PAREM_LIST ')' ';'
+
+    IDENTIFIER  shift, and go to state 90
+    ')'         shift, and go to state 91
+
+    PAREM_LIST  go to state 92
+
+
+State 59
+
+    9 DEF_GLOBAL: STRUCT IDENTIFIER BGIN BLOC END . ';'
+   10           | STRUCT IDENTIFIER BGIN BLOC END . IDENTIFIER ';'
+
+    IDENTIFIER  shift, and go to state 93
+    ';'         shift, and go to state 94
+
+
+State 60
+
+   18 BLOC: BLOC APEL_FUNCTIE .
+
+    $default  reduce using rule 18 (BLOC)
+
+
+State 61
+
+   20 BLOC: BLOC DEF_LOCALE .
+
+    $default  reduce using rule 20 (BLOC)
+
+
+State 62
+
+   19 BLOC: BLOC STATEMENT .
+
+    $default  reduce using rule 19 (BLOC)
+
+
+State 63
+
+   21 BLOC: BLOC STRUCTURA_DE_CONTROL .
+
+    $default  reduce using rule 21 (BLOC)
+
+
+State 64
+
+   33 DEF_LOCALE: VARTYPE ARRAY_IDENTIFIER . ';'
+
+    ';'  shift, and go to state 95
+
+
+State 65
+
+   30 DEF_LOCALE: VARTYPE IDENTIFIER . ';'
+   31           | VARTYPE IDENTIFIER . ASSIGN VALOARE ';'
+   32           | VARTYPE IDENTIFIER . ASSIGN EXPRESIE ';'
+
+    ASSIGN  shift, and go to state 96
+    ';'     shift, and go to state 97
+
+
+State 66
+
+   68 EXPRESIE: EXPRESIE . '+' EXPRESIE
+   69         | EXPRESIE . '-' EXPRESIE
+   70         | EXPRESIE . '*' EXPRESIE
+   71         | EXPRESIE . '/' EXPRESIE
+   72         | '(' EXPRESIE . ')'
+
+    '+'  shift, and go to state 67
+    '-'  shift, and go to state 68
+    '*'  shift, and go to state 69
+    '/'  shift, and go to state 70
+    ')'  shift, and go to state 98
+
+
+State 67
+
+   68 EXPRESIE: EXPRESIE '+' . EXPRESIE
+
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 43
+
+    EXPRESIE  go to state 99
+
+
+State 68
+
+   69 EXPRESIE: EXPRESIE '-' . EXPRESIE
+
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 43
+
+    EXPRESIE  go to state 100
+
+
+State 69
+
+   70 EXPRESIE: EXPRESIE '*' . EXPRESIE
+
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 43
+
+    EXPRESIE  go to state 101
+
+
+State 70
+
+   71 EXPRESIE: EXPRESIE '/' . EXPRESIE
+
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 43
+
+    EXPRESIE  go to state 102
+
+
+State 71
+
+    5 DEF_GLOBAL: VARTYPE IDENTIFIER ASSIGN EXPRESIE ';' .
+
+    $default  reduce using rule 5 (DEF_GLOBAL)
+
+
+State 72
+
+    4 DEF_GLOBAL: VARTYPE IDENTIFIER ASSIGN VALOARE ';' .
+
+    $default  reduce using rule 4 (DEF_GLOBAL)
+
+
+State 73
+
+    6 DEF_GLOBAL: VARTYPE IDENTIFIER '(' ')' BGIN . BLOC END
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 26
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    BLOC                  go to state 103
+    APEL_FUNCTIE          go to state 30
+    DEF_LOCALE            go to state 31
+    STATEMENT             go to state 32
+    STRUCTURA_DE_CONTROL  go to state 33
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 74
+
+    7 DEF_GLOBAL: VARTYPE IDENTIFIER '(' LISTA_PARAMETRII ')' . BGIN BLOC END
+
+    BGIN  shift, and go to state 104
+
+
+State 75
+
+   39 LISTA_PARAMETRII: LISTA_PARAMETRII ',' . VARTYPE IDENTIFIER
+
+    REAL    shift, and go to state 1
+    INT     shift, and go to state 2
+    BOOL    shift, and go to state 3
+    STRUCT  shift, and go to state 46
+    STRING  shift, and go to state 5
+
+    VARTYPE  go to state 105
+
+
+State 76
+
+   38 LISTA_PARAMETRII: VARTYPE IDENTIFIER .
+
+    $default  reduce using rule 38 (LISTA_PARAMETRII)
+
+
+State 77
+
+   36 STATEMENT: STCT IDENTIFIER ',' . IDENTIFIER ';'
+
+    IDENTIFIER  shift, and go to state 106
+
+
+State 78
+
+   37 STATEMENT: STCPY IDENTIFIER ',' . IDENTIFIER ';'
+
+    IDENTIFIER  shift, and go to state 107
+
+
+State 79
+
+   63 bools: TRUE .
+
+    $default  reduce using rule 63 (bools)
+
+
+State 80
+
+   64 bools: FALSE .
+
+    $default  reduce using rule 64 (bools)
+
+
+State 81
+
+   62 condition: '(' . condition ')'
+   72 EXPRESIE: '(' . EXPRESIE ')'
+
+    TRUE           shift, and go to state 79
+    FALSE          shift, and go to state 80
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 81
+
+    condition  go to state 108
+    bools      go to state 83
+    EXPRESIE   go to state 109
+
+
+State 82
+
+   43 IF_CAZURI: IF '(' condition . ')' BGIN BLOC END ELSE BGIN BLOC END
+   44          | IF '(' condition . ')' BGIN BLOC END ELSE BLOC2
+   45          | IF '(' condition . ')' BGIN BLOC END
+   46          | IF '(' condition . ')' BLOC2
+   47          | IF '(' condition . ')' BLOC2 ELSE BGIN BLOC END
+   48          | IF '(' condition . ')' BLOC2 ELSE BLOC2
+   54 condition: condition . LEQ bools
+   55          | condition . LE bools
+   56          | condition . GE bools
+   57          | condition . GEQ bools
+   58          | condition . EQ bools
+   59          | condition . NEQ bools
+   60          | condition . AND bools
+   61          | condition . OR bools
+
+    NEQ  shift, and go to state 110
+    EQ   shift, and go to state 111
+    LE   shift, and go to state 112
+    LEQ  shift, and go to state 113
+    GE   shift, and go to state 114
+    GEQ  shift, and go to state 115
+    AND  shift, and go to state 116
+    OR   shift, and go to state 117
+    ')'  shift, and go to state 118
+
+
+State 83
+
+   53 condition: bools .
+
+    $default  reduce using rule 53 (condition)
+
+
+State 84
+
+   65 bools: EXPRESIE .
+   68 EXPRESIE: EXPRESIE . '+' EXPRESIE
+   69         | EXPRESIE . '-' EXPRESIE
+   70         | EXPRESIE . '*' EXPRESIE
+   71         | EXPRESIE . '/' EXPRESIE
+
+    '+'  shift, and go to state 67
+    '-'  shift, and go to state 68
+    '*'  shift, and go to state 69
+    '/'  shift, and go to state 70
+
+    $default  reduce using rule 65 (bools)
+
+
+State 85
+
+   49 WHILE_CAZURI: WHILE '(' condition . ')' BGIN BLOC END
+   50             | WHILE '(' condition . ')' BLOC2
+   54 condition: condition . LEQ bools
+   55          | condition . LE bools
+   56          | condition . GE bools
+   57          | condition . GEQ bools
+   58          | condition . EQ bools
+   59          | condition . NEQ bools
+   60          | condition . AND bools
+   61          | condition . OR bools
+
+    NEQ  shift, and go to state 110
+    EQ   shift, and go to state 111
+    LE   shift, and go to state 112
+    LEQ  shift, and go to state 113
+    GE   shift, and go to state 114
+    GEQ  shift, and go to state 115
+    AND  shift, and go to state 116
+    OR   shift, and go to state 117
+    ')'  shift, and go to state 119
+
+
+State 86
+
+   35 STATEMENT: IDENTIFIER . ASSIGN EXPRESIE ';'
+
+    ASSIGN  shift, and go to state 57
+
+
+State 87
+
+   51 FOR_CAZURI: FOR '(' STATEMENT . condition ';' STATEMENT ')' BLOC2
+   52           | FOR '(' STATEMENT . condition ';' STATEMENT ')' BGIN BLOC END
+
+    TRUE           shift, and go to state 79
+    FALSE          shift, and go to state 80
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 81
+
+    condition  go to state 120
+    bools      go to state 83
+    EXPRESIE   go to state 84
+
+
+State 88
+
+   13 BLOC: STRUCT IDENTIFIER BGIN . BLOC END ';'
+   14     | STRUCT IDENTIFIER BGIN . BLOC END IDENTIFIER ';'
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 26
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    BLOC                  go to state 121
+    APEL_FUNCTIE          go to state 30
+    DEF_LOCALE            go to state 31
+    STATEMENT             go to state 32
+    STRUCTURA_DE_CONTROL  go to state 33
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 89
+
+   35 STATEMENT: IDENTIFIER ASSIGN EXPRESIE . ';'
+   68 EXPRESIE: EXPRESIE . '+' EXPRESIE
+   69         | EXPRESIE . '-' EXPRESIE
+   70         | EXPRESIE . '*' EXPRESIE
+   71         | EXPRESIE . '/' EXPRESIE
+
+    '+'  shift, and go to state 67
+    '-'  shift, and go to state 68
+    '*'  shift, and go to state 69
+    '/'  shift, and go to state 70
+    ';'  shift, and go to state 122
+
+
+State 90
+
+   25 PAREM_LIST: IDENTIFIER .
+
+    $default  reduce using rule 25 (PAREM_LIST)
+
+
+State 91
+
+   22 APEL_FUNCTIE: IDENTIFIER '(' ')' . ';'
+
+    ';'  shift, and go to state 123
+
+
+State 92
+
+   23 APEL_FUNCTIE: IDENTIFIER '(' PAREM_LIST . ')' ';'
+   26 PAREM_LIST: PAREM_LIST . ',' IDENTIFIER
+
+    ')'  shift, and go to state 124
+    ','  shift, and go to state 125
+
+
+State 93
+
+   10 DEF_GLOBAL: STRUCT IDENTIFIER BGIN BLOC END IDENTIFIER . ';'
+
+    ';'  shift, and go to state 126
+
+
+State 94
+
+    9 DEF_GLOBAL: STRUCT IDENTIFIER BGIN BLOC END ';' .
+
+    $default  reduce using rule 9 (DEF_GLOBAL)
+
+
+State 95
+
+   33 DEF_LOCALE: VARTYPE ARRAY_IDENTIFIER ';' .
+
+    $default  reduce using rule 33 (DEF_LOCALE)
+
+
+State 96
+
+   31 DEF_LOCALE: VARTYPE IDENTIFIER ASSIGN . VALOARE ';'
+   32           | VARTYPE IDENTIFIER ASSIGN . EXPRESIE ';'
+
+    CHARACTER_VALUE  shift, and go to state 38
+    INTEGER_VALUE    shift, and go to state 39
+    FLOAT_VALUE      shift, and go to state 40
+    STRING_VALUE     shift, and go to state 41
+    IDENTIFIER       shift, and go to state 42
+    '('              shift, and go to state 43
+
+    EXPRESIE  go to state 127
+    VALOARE   go to state 128
+
+
+State 97
+
+   30 DEF_LOCALE: VARTYPE IDENTIFIER ';' .
+
+    $default  reduce using rule 30 (DEF_LOCALE)
+
+
+State 98
+
+   72 EXPRESIE: '(' EXPRESIE ')' .
+
+    $default  reduce using rule 72 (EXPRESIE)
+
+
+State 99
+
+   68 EXPRESIE: EXPRESIE . '+' EXPRESIE
+   68         | EXPRESIE '+' EXPRESIE .
+   69         | EXPRESIE . '-' EXPRESIE
+   70         | EXPRESIE . '*' EXPRESIE
+   71         | EXPRESIE . '/' EXPRESIE
+
+    '*'  shift, and go to state 69
+    '/'  shift, and go to state 70
+
+    $default  reduce using rule 68 (EXPRESIE)
+
+
+State 100
+
+   68 EXPRESIE: EXPRESIE . '+' EXPRESIE
+   69         | EXPRESIE . '-' EXPRESIE
+   69         | EXPRESIE '-' EXPRESIE .
+   70         | EXPRESIE . '*' EXPRESIE
+   71         | EXPRESIE . '/' EXPRESIE
+
+    '*'  shift, and go to state 69
+    '/'  shift, and go to state 70
+
+    $default  reduce using rule 69 (EXPRESIE)
+
+
+State 101
+
+   68 EXPRESIE: EXPRESIE . '+' EXPRESIE
+   69         | EXPRESIE . '-' EXPRESIE
+   70         | EXPRESIE . '*' EXPRESIE
+   70         | EXPRESIE '*' EXPRESIE .
+   71         | EXPRESIE . '/' EXPRESIE
+
+    $default  reduce using rule 70 (EXPRESIE)
+
+
+State 102
+
+   68 EXPRESIE: EXPRESIE . '+' EXPRESIE
+   69         | EXPRESIE . '-' EXPRESIE
+   70         | EXPRESIE . '*' EXPRESIE
+   71         | EXPRESIE . '/' EXPRESIE
+   71         | EXPRESIE '/' EXPRESIE .
+
+    $default  reduce using rule 71 (EXPRESIE)
+
+
+State 103
+
+    6 DEF_GLOBAL: VARTYPE IDENTIFIER '(' ')' BGIN BLOC . END
+   18 BLOC: BLOC . APEL_FUNCTIE
+   19     | BLOC . STATEMENT
+   20     | BLOC . DEF_LOCALE
+   21     | BLOC . STRUCTURA_DE_CONTROL
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    END         shift, and go to state 129
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 46
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    APEL_FUNCTIE          go to state 60
+    DEF_LOCALE            go to state 61
+    STATEMENT             go to state 62
+    STRUCTURA_DE_CONTROL  go to state 63
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 104
+
+    7 DEF_GLOBAL: VARTYPE IDENTIFIER '(' LISTA_PARAMETRII ')' BGIN . BLOC END
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 26
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    BLOC                  go to state 130
+    APEL_FUNCTIE          go to state 30
+    DEF_LOCALE            go to state 31
+    STATEMENT             go to state 32
+    STRUCTURA_DE_CONTROL  go to state 33
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 105
+
+   39 LISTA_PARAMETRII: LISTA_PARAMETRII ',' VARTYPE . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 131
+
+
+State 106
+
+   36 STATEMENT: STCT IDENTIFIER ',' IDENTIFIER . ';'
+
+    ';'  shift, and go to state 132
+
+
+State 107
+
+   37 STATEMENT: STCPY IDENTIFIER ',' IDENTIFIER . ';'
+
+    ';'  shift, and go to state 133
+
+
+State 108
+
+   54 condition: condition . LEQ bools
+   55          | condition . LE bools
+   56          | condition . GE bools
+   57          | condition . GEQ bools
+   58          | condition . EQ bools
+   59          | condition . NEQ bools
+   60          | condition . AND bools
+   61          | condition . OR bools
+   62          | '(' condition . ')'
+
+    NEQ  shift, and go to state 110
+    EQ   shift, and go to state 111
+    LE   shift, and go to state 112
+    LEQ  shift, and go to state 113
+    GE   shift, and go to state 114
+    GEQ  shift, and go to state 115
+    AND  shift, and go to state 116
+    OR   shift, and go to state 117
+    ')'  shift, and go to state 134
+
+
+State 109
+
+   65 bools: EXPRESIE .
+   68 EXPRESIE: EXPRESIE . '+' EXPRESIE
+   69         | EXPRESIE . '-' EXPRESIE
+   70         | EXPRESIE . '*' EXPRESIE
+   71         | EXPRESIE . '/' EXPRESIE
+   72         | '(' EXPRESIE . ')'
+
+    '+'  shift, and go to state 67
+    '-'  shift, and go to state 68
+    '*'  shift, and go to state 69
+    '/'  shift, and go to state 70
+    ')'  shift, and go to state 98
+
+    ')'       [reduce using rule 65 (bools)]
+    $default  reduce using rule 65 (bools)
+
+
+State 110
+
+   59 condition: condition NEQ . bools
+
+    TRUE           shift, and go to state 79
+    FALSE          shift, and go to state 80
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 43
+
+    bools     go to state 135
+    EXPRESIE  go to state 84
+
+
+State 111
+
+   58 condition: condition EQ . bools
+
+    TRUE           shift, and go to state 79
+    FALSE          shift, and go to state 80
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 43
+
+    bools     go to state 136
+    EXPRESIE  go to state 84
+
+
+State 112
+
+   55 condition: condition LE . bools
+
+    TRUE           shift, and go to state 79
+    FALSE          shift, and go to state 80
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 43
+
+    bools     go to state 137
+    EXPRESIE  go to state 84
+
+
+State 113
+
+   54 condition: condition LEQ . bools
+
+    TRUE           shift, and go to state 79
+    FALSE          shift, and go to state 80
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 43
+
+    bools     go to state 138
+    EXPRESIE  go to state 84
+
+
+State 114
+
+   56 condition: condition GE . bools
+
+    TRUE           shift, and go to state 79
+    FALSE          shift, and go to state 80
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 43
+
+    bools     go to state 139
+    EXPRESIE  go to state 84
+
+
+State 115
+
+   57 condition: condition GEQ . bools
+
+    TRUE           shift, and go to state 79
+    FALSE          shift, and go to state 80
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 43
+
+    bools     go to state 140
+    EXPRESIE  go to state 84
+
+
+State 116
+
+   60 condition: condition AND . bools
+
+    TRUE           shift, and go to state 79
+    FALSE          shift, and go to state 80
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 43
+
+    bools     go to state 141
+    EXPRESIE  go to state 84
+
+
+State 117
+
+   61 condition: condition OR . bools
+
+    TRUE           shift, and go to state 79
+    FALSE          shift, and go to state 80
+    INTEGER_VALUE  shift, and go to state 39
+    IDENTIFIER     shift, and go to state 42
+    '('            shift, and go to state 43
+
+    bools     go to state 142
+    EXPRESIE  go to state 84
+
+
+State 118
+
+   43 IF_CAZURI: IF '(' condition ')' . BGIN BLOC END ELSE BGIN BLOC END
+   44          | IF '(' condition ')' . BGIN BLOC END ELSE BLOC2
+   45          | IF '(' condition ')' . BGIN BLOC END
+   46          | IF '(' condition ')' . BLOC2
+   47          | IF '(' condition ')' . BLOC2 ELSE BGIN BLOC END
+   48          | IF '(' condition ')' . BLOC2 ELSE BLOC2
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    BGIN        shift, and go to state 143
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 46
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 86
+    ';'         shift, and go to state 28
+
+    BLOC2                 go to state 144
+    DEF_LOCALE            go to state 145
+    STATEMENT             go to state 146
+    STRUCTURA_DE_CONTROL  go to state 147
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 119
+
+   49 WHILE_CAZURI: WHILE '(' condition ')' . BGIN BLOC END
+   50             | WHILE '(' condition ')' . BLOC2
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    BGIN        shift, and go to state 148
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 46
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 86
+    ';'         shift, and go to state 28
+
+    BLOC2                 go to state 149
+    DEF_LOCALE            go to state 145
+    STATEMENT             go to state 146
+    STRUCTURA_DE_CONTROL  go to state 147
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 120
+
+   51 FOR_CAZURI: FOR '(' STATEMENT condition . ';' STATEMENT ')' BLOC2
+   52           | FOR '(' STATEMENT condition . ';' STATEMENT ')' BGIN BLOC END
+   54 condition: condition . LEQ bools
+   55          | condition . LE bools
+   56          | condition . GE bools
+   57          | condition . GEQ bools
+   58          | condition . EQ bools
+   59          | condition . NEQ bools
+   60          | condition . AND bools
+   61          | condition . OR bools
+
+    NEQ  shift, and go to state 110
+    EQ   shift, and go to state 111
+    LE   shift, and go to state 112
+    LEQ  shift, and go to state 113
+    GE   shift, and go to state 114
+    GEQ  shift, and go to state 115
+    AND  shift, and go to state 116
+    OR   shift, and go to state 117
+    ';'  shift, and go to state 150
+
+
+State 121
+
+   13 BLOC: STRUCT IDENTIFIER BGIN BLOC . END ';'
+   14     | STRUCT IDENTIFIER BGIN BLOC . END IDENTIFIER ';'
+   18     | BLOC . APEL_FUNCTIE
+   19     | BLOC . STATEMENT
+   20     | BLOC . DEF_LOCALE
+   21     | BLOC . STRUCTURA_DE_CONTROL
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    END         shift, and go to state 151
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 46
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    APEL_FUNCTIE          go to state 60
+    DEF_LOCALE            go to state 61
+    STATEMENT             go to state 62
+    STRUCTURA_DE_CONTROL  go to state 63
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 122
+
+   35 STATEMENT: IDENTIFIER ASSIGN EXPRESIE ';' .
+
+    $default  reduce using rule 35 (STATEMENT)
+
+
+State 123
+
+   22 APEL_FUNCTIE: IDENTIFIER '(' ')' ';' .
+
+    $default  reduce using rule 22 (APEL_FUNCTIE)
+
+
+State 124
+
+   23 APEL_FUNCTIE: IDENTIFIER '(' PAREM_LIST ')' . ';'
+
+    ';'  shift, and go to state 152
+
+
+State 125
+
+   26 PAREM_LIST: PAREM_LIST ',' . IDENTIFIER
+
+    IDENTIFIER  shift, and go to state 153
+
+
+State 126
+
+   10 DEF_GLOBAL: STRUCT IDENTIFIER BGIN BLOC END IDENTIFIER ';' .
+
+    $default  reduce using rule 10 (DEF_GLOBAL)
+
+
+State 127
+
+   32 DEF_LOCALE: VARTYPE IDENTIFIER ASSIGN EXPRESIE . ';'
+   68 EXPRESIE: EXPRESIE . '+' EXPRESIE
+   69         | EXPRESIE . '-' EXPRESIE
+   70         | EXPRESIE . '*' EXPRESIE
+   71         | EXPRESIE . '/' EXPRESIE
+
+    '+'  shift, and go to state 67
+    '-'  shift, and go to state 68
+    '*'  shift, and go to state 69
+    '/'  shift, and go to state 70
+    ';'  shift, and go to state 154
+
+
+State 128
+
+   31 DEF_LOCALE: VARTYPE IDENTIFIER ASSIGN VALOARE . ';'
+
+    ';'  shift, and go to state 155
+
+
+State 129
+
+    6 DEF_GLOBAL: VARTYPE IDENTIFIER '(' ')' BGIN BLOC END .
+
+    $default  reduce using rule 6 (DEF_GLOBAL)
+
+
+State 130
+
+    7 DEF_GLOBAL: VARTYPE IDENTIFIER '(' LISTA_PARAMETRII ')' BGIN BLOC . END
+   18 BLOC: BLOC . APEL_FUNCTIE
+   19     | BLOC . STATEMENT
+   20     | BLOC . DEF_LOCALE
+   21     | BLOC . STRUCTURA_DE_CONTROL
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    END         shift, and go to state 156
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 46
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    APEL_FUNCTIE          go to state 60
+    DEF_LOCALE            go to state 61
+    STATEMENT             go to state 62
+    STRUCTURA_DE_CONTROL  go to state 63
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 131
+
+   39 LISTA_PARAMETRII: LISTA_PARAMETRII ',' VARTYPE IDENTIFIER .
+
+    $default  reduce using rule 39 (LISTA_PARAMETRII)
+
+
+State 132
+
+   36 STATEMENT: STCT IDENTIFIER ',' IDENTIFIER ';' .
+
+    $default  reduce using rule 36 (STATEMENT)
+
+
+State 133
+
+   37 STATEMENT: STCPY IDENTIFIER ',' IDENTIFIER ';' .
+
+    $default  reduce using rule 37 (STATEMENT)
+
+
+State 134
+
+   62 condition: '(' condition ')' .
+
+    $default  reduce using rule 62 (condition)
+
+
+State 135
+
+   59 condition: condition NEQ bools .
+
+    $default  reduce using rule 59 (condition)
+
+
+State 136
+
+   58 condition: condition EQ bools .
+
+    $default  reduce using rule 58 (condition)
+
+
+State 137
+
+   55 condition: condition LE bools .
+
+    $default  reduce using rule 55 (condition)
+
+
+State 138
+
+   54 condition: condition LEQ bools .
+
+    $default  reduce using rule 54 (condition)
+
+
+State 139
+
+   56 condition: condition GE bools .
+
+    $default  reduce using rule 56 (condition)
+
+
+State 140
+
+   57 condition: condition GEQ bools .
+
+    $default  reduce using rule 57 (condition)
+
+
+State 141
+
+   60 condition: condition AND bools .
+
+    $default  reduce using rule 60 (condition)
+
+
+State 142
+
+   61 condition: condition OR bools .
+
+    $default  reduce using rule 61 (condition)
+
+
+State 143
+
+   43 IF_CAZURI: IF '(' condition ')' BGIN . BLOC END ELSE BGIN BLOC END
+   44          | IF '(' condition ')' BGIN . BLOC END ELSE BLOC2
+   45          | IF '(' condition ')' BGIN . BLOC END
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 26
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    BLOC                  go to state 157
+    APEL_FUNCTIE          go to state 30
+    DEF_LOCALE            go to state 31
+    STATEMENT             go to state 32
+    STRUCTURA_DE_CONTROL  go to state 33
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 144
+
+   46 IF_CAZURI: IF '(' condition ')' BLOC2 .
+   47          | IF '(' condition ')' BLOC2 . ELSE BGIN BLOC END
+   48          | IF '(' condition ')' BLOC2 . ELSE BLOC2
+
+    ELSE  shift, and go to state 158
+
+    ELSE      [reduce using rule 46 (IF_CAZURI)]
+    $default  reduce using rule 46 (IF_CAZURI)
+
+
+State 145
+
+   28 BLOC2: DEF_LOCALE .
+
+    $default  reduce using rule 28 (BLOC2)
+
+
+State 146
+
+   27 BLOC2: STATEMENT .
+
+    $default  reduce using rule 27 (BLOC2)
+
+
+State 147
+
+   29 BLOC2: STRUCTURA_DE_CONTROL .
+
+    $default  reduce using rule 29 (BLOC2)
+
+
+State 148
+
+   49 WHILE_CAZURI: WHILE '(' condition ')' BGIN . BLOC END
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 26
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    BLOC                  go to state 159
+    APEL_FUNCTIE          go to state 30
+    DEF_LOCALE            go to state 31
+    STATEMENT             go to state 32
+    STRUCTURA_DE_CONTROL  go to state 33
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 149
+
+   50 WHILE_CAZURI: WHILE '(' condition ')' BLOC2 .
+
+    $default  reduce using rule 50 (WHILE_CAZURI)
+
+
+State 150
+
+   51 FOR_CAZURI: FOR '(' STATEMENT condition ';' . STATEMENT ')' BLOC2
+   52           | FOR '(' STATEMENT condition ';' . STATEMENT ')' BGIN BLOC END
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IDENTIFIER  shift, and go to state 86
+
+    STATEMENT  go to state 160
+
+
+State 151
+
+   13 BLOC: STRUCT IDENTIFIER BGIN BLOC END . ';'
+   14     | STRUCT IDENTIFIER BGIN BLOC END . IDENTIFIER ';'
+
+    IDENTIFIER  shift, and go to state 161
+    ';'         shift, and go to state 162
+
+
+State 152
+
+   23 APEL_FUNCTIE: IDENTIFIER '(' PAREM_LIST ')' ';' .
+
+    $default  reduce using rule 23 (APEL_FUNCTIE)
+
+
+State 153
+
+   26 PAREM_LIST: PAREM_LIST ',' IDENTIFIER .
+
+    $default  reduce using rule 26 (PAREM_LIST)
+
+
+State 154
+
+   32 DEF_LOCALE: VARTYPE IDENTIFIER ASSIGN EXPRESIE ';' .
+
+    $default  reduce using rule 32 (DEF_LOCALE)
+
+
+State 155
+
+   31 DEF_LOCALE: VARTYPE IDENTIFIER ASSIGN VALOARE ';' .
+
+    $default  reduce using rule 31 (DEF_LOCALE)
+
+
+State 156
+
+    7 DEF_GLOBAL: VARTYPE IDENTIFIER '(' LISTA_PARAMETRII ')' BGIN BLOC END .
+
+    $default  reduce using rule 7 (DEF_GLOBAL)
+
+
+State 157
+
+   18 BLOC: BLOC . APEL_FUNCTIE
+   19     | BLOC . STATEMENT
+   20     | BLOC . DEF_LOCALE
+   21     | BLOC . STRUCTURA_DE_CONTROL
+   43 IF_CAZURI: IF '(' condition ')' BGIN BLOC . END ELSE BGIN BLOC END
+   44          | IF '(' condition ')' BGIN BLOC . END ELSE BLOC2
+   45          | IF '(' condition ')' BGIN BLOC . END
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    END         shift, and go to state 163
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 46
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    APEL_FUNCTIE          go to state 60
+    DEF_LOCALE            go to state 61
+    STATEMENT             go to state 62
+    STRUCTURA_DE_CONTROL  go to state 63
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 158
+
+   47 IF_CAZURI: IF '(' condition ')' BLOC2 ELSE . BGIN BLOC END
+   48          | IF '(' condition ')' BLOC2 ELSE . BLOC2
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    BGIN        shift, and go to state 164
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 46
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 86
+    ';'         shift, and go to state 28
+
+    BLOC2                 go to state 165
+    DEF_LOCALE            go to state 145
+    STATEMENT             go to state 146
+    STRUCTURA_DE_CONTROL  go to state 147
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 159
+
+   18 BLOC: BLOC . APEL_FUNCTIE
+   19     | BLOC . STATEMENT
+   20     | BLOC . DEF_LOCALE
+   21     | BLOC . STRUCTURA_DE_CONTROL
+   49 WHILE_CAZURI: WHILE '(' condition ')' BGIN BLOC . END
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    END         shift, and go to state 166
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 46
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    APEL_FUNCTIE          go to state 60
+    DEF_LOCALE            go to state 61
+    STATEMENT             go to state 62
+    STRUCTURA_DE_CONTROL  go to state 63
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 160
+
+   51 FOR_CAZURI: FOR '(' STATEMENT condition ';' STATEMENT . ')' BLOC2
+   52           | FOR '(' STATEMENT condition ';' STATEMENT . ')' BGIN BLOC END
+
+    ')'  shift, and go to state 167
+
+
+State 161
+
+   14 BLOC: STRUCT IDENTIFIER BGIN BLOC END IDENTIFIER . ';'
+
+    ';'  shift, and go to state 168
+
+
+State 162
+
+   13 BLOC: STRUCT IDENTIFIER BGIN BLOC END ';' .
+
+    $default  reduce using rule 13 (BLOC)
+
+
+State 163
+
+   43 IF_CAZURI: IF '(' condition ')' BGIN BLOC END . ELSE BGIN BLOC END
+   44          | IF '(' condition ')' BGIN BLOC END . ELSE BLOC2
+   45          | IF '(' condition ')' BGIN BLOC END .
+
+    ELSE  shift, and go to state 169
+
+    ELSE      [reduce using rule 45 (IF_CAZURI)]
+    $default  reduce using rule 45 (IF_CAZURI)
+
+
+State 164
+
+   47 IF_CAZURI: IF '(' condition ')' BLOC2 ELSE BGIN . BLOC END
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 26
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    BLOC                  go to state 170
+    APEL_FUNCTIE          go to state 30
+    DEF_LOCALE            go to state 31
+    STATEMENT             go to state 32
+    STRUCTURA_DE_CONTROL  go to state 33
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 165
+
+   48 IF_CAZURI: IF '(' condition ')' BLOC2 ELSE BLOC2 .
+
+    $default  reduce using rule 48 (IF_CAZURI)
+
+
+State 166
+
+   49 WHILE_CAZURI: WHILE '(' condition ')' BGIN BLOC END .
+
+    $default  reduce using rule 49 (WHILE_CAZURI)
+
+
+State 167
+
+   51 FOR_CAZURI: FOR '(' STATEMENT condition ';' STATEMENT ')' . BLOC2
+   52           | FOR '(' STATEMENT condition ';' STATEMENT ')' . BGIN BLOC END
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    BGIN        shift, and go to state 171
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 46
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 86
+    ';'         shift, and go to state 28
+
+    BLOC2                 go to state 172
+    DEF_LOCALE            go to state 145
+    STATEMENT             go to state 146
+    STRUCTURA_DE_CONTROL  go to state 147
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 168
+
+   14 BLOC: STRUCT IDENTIFIER BGIN BLOC END IDENTIFIER ';' .
+
+    $default  reduce using rule 14 (BLOC)
+
+
+State 169
+
+   43 IF_CAZURI: IF '(' condition ')' BGIN BLOC END ELSE . BGIN BLOC END
+   44          | IF '(' condition ')' BGIN BLOC END ELSE . BLOC2
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    BGIN        shift, and go to state 173
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 46
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 86
+    ';'         shift, and go to state 28
+
+    BLOC2                 go to state 174
+    DEF_LOCALE            go to state 145
+    STATEMENT             go to state 146
+    STRUCTURA_DE_CONTROL  go to state 147
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 170
+
+   18 BLOC: BLOC . APEL_FUNCTIE
+   19     | BLOC . STATEMENT
+   20     | BLOC . DEF_LOCALE
+   21     | BLOC . STRUCTURA_DE_CONTROL
+   47 IF_CAZURI: IF '(' condition ')' BLOC2 ELSE BGIN BLOC . END
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    END         shift, and go to state 175
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 46
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    APEL_FUNCTIE          go to state 60
+    DEF_LOCALE            go to state 61
+    STATEMENT             go to state 62
+    STRUCTURA_DE_CONTROL  go to state 63
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 171
+
+   52 FOR_CAZURI: FOR '(' STATEMENT condition ';' STATEMENT ')' BGIN . BLOC END
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 26
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    BLOC                  go to state 176
+    APEL_FUNCTIE          go to state 30
+    DEF_LOCALE            go to state 31
+    STATEMENT             go to state 32
+    STRUCTURA_DE_CONTROL  go to state 33
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 172
+
+   51 FOR_CAZURI: FOR '(' STATEMENT condition ';' STATEMENT ')' BLOC2 .
+
+    $default  reduce using rule 51 (FOR_CAZURI)
+
+
+State 173
+
+   43 IF_CAZURI: IF '(' condition ')' BGIN BLOC END ELSE BGIN . BLOC END
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 26
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    BLOC                  go to state 177
+    APEL_FUNCTIE          go to state 30
+    DEF_LOCALE            go to state 31
+    STATEMENT             go to state 32
+    STRUCTURA_DE_CONTROL  go to state 33
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 174
+
+   44 IF_CAZURI: IF '(' condition ')' BGIN BLOC END ELSE BLOC2 .
+
+    $default  reduce using rule 44 (IF_CAZURI)
+
+
+State 175
+
+   47 IF_CAZURI: IF '(' condition ')' BLOC2 ELSE BGIN BLOC END .
+
+    $default  reduce using rule 47 (IF_CAZURI)
+
+
+State 176
+
+   18 BLOC: BLOC . APEL_FUNCTIE
+   19     | BLOC . STATEMENT
+   20     | BLOC . DEF_LOCALE
+   21     | BLOC . STRUCTURA_DE_CONTROL
+   52 FOR_CAZURI: FOR '(' STATEMENT condition ';' STATEMENT ')' BGIN BLOC . END
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    END         shift, and go to state 178
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 46
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    APEL_FUNCTIE          go to state 60
+    DEF_LOCALE            go to state 61
+    STATEMENT             go to state 62
+    STRUCTURA_DE_CONTROL  go to state 63
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 177
+
+   18 BLOC: BLOC . APEL_FUNCTIE
+   19     | BLOC . STATEMENT
+   20     | BLOC . DEF_LOCALE
+   21     | BLOC . STRUCTURA_DE_CONTROL
+   43 IF_CAZURI: IF '(' condition ')' BGIN BLOC END ELSE BGIN BLOC . END
+
+    STCT        shift, and go to state 20
+    STCPY       shift, and go to state 21
+    IF          shift, and go to state 22
+    WHILE       shift, and go to state 23
+    FOR         shift, and go to state 24
+    PRINT       shift, and go to state 25
+    END         shift, and go to state 179
+    REAL        shift, and go to state 1
+    INT         shift, and go to state 2
+    BOOL        shift, and go to state 3
+    STRUCT      shift, and go to state 46
+    STRING      shift, and go to state 5
+    IDENTIFIER  shift, and go to state 27
+    ';'         shift, and go to state 28
+
+    APEL_FUNCTIE          go to state 60
+    DEF_LOCALE            go to state 61
+    STATEMENT             go to state 62
+    STRUCTURA_DE_CONTROL  go to state 63
+    IF_CAZURI             go to state 34
+    WHILE_CAZURI          go to state 35
+    FOR_CAZURI            go to state 36
+    VARTYPE               go to state 37
+
+
+State 178
+
+   52 FOR_CAZURI: FOR '(' STATEMENT condition ';' STATEMENT ')' BGIN BLOC END .
+
+    $default  reduce using rule 52 (FOR_CAZURI)
+
+
+State 179
+
+   43 IF_CAZURI: IF '(' condition ')' BGIN BLOC END ELSE BGIN BLOC END .
+
+    $default  reduce using rule 43 (IF_CAZURI)
